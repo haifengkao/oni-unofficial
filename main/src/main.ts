@@ -351,12 +351,9 @@ function focusNextInstance(direction) {
 
 function loadFileFromArguments(platform, args, workingDirectory) {
     const localOni = "LOCAL_ONI"
-    let window = null
-    if (!process.env[localOni]) {
-        window = createWindow(args.slice(1), workingDirectory)
-    } else {
-        window = createWindow(args.slice(2), workingDirectory)
-    }
+    const window = !process.env[localOni]
+        ? createWindow(args.slice(1), workingDirectory)
+        : createWindow(args.slice(2), workingDirectory)
     if (window) {
         window.show()
     }
