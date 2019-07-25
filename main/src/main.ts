@@ -134,6 +134,15 @@ export function createWindow(
     workingDirectory,
     delayedEvent: IDelayedEvent = null,
 ) {
+    // single instance patch
+    let singleWindow = windows[0]
+    if (singleWindow) {
+        // filePath should be the last argument
+        let filePath = commandLineArguments.slice(-1)[0];
+        singleWindow.webContents.send("open-file", filePath)
+        return singleWindow
+    }
+
     Log.info(
         `Creating window with arguments: ${commandLineArguments} and working directory: ${workingDirectory}`,
     )
