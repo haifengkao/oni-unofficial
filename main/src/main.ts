@@ -351,10 +351,14 @@ function focusNextInstance(direction) {
 
 function loadFileFromArguments(platform, args, workingDirectory) {
     const localOni = "LOCAL_ONI"
+    let window = null
     if (!process.env[localOni]) {
-        createWindow(args.slice(1), workingDirectory)
+        window = createWindow(args.slice(1), workingDirectory)
     } else {
-        createWindow(args.slice(2), workingDirectory)
+        window = createWindow(args.slice(2), workingDirectory)
+    }
+    if (window) {
+        window.show()
     }
 }
 // In this file you can include the rest of your app's specific main process
